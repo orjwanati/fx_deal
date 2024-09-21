@@ -32,8 +32,9 @@ This project is a Spring Boot application for managing FX  deals. It provides fe
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-repo/fx_deal.git
+git clone https://github.com/orjwanati/fx_deal.git
 cd fx_deal
+```
 
 ## How to Run the Application
 
@@ -43,30 +44,30 @@ You can build and run the application using the provided Makefile.
 To build the app and start the containers:
 
 ```bash
-Copy code
 make run
+```
 This will build the Docker image for the Spring Boot app and start all services, including the MySQL database.
 
 To start the app in detached mode:
 
 ```bash
-Copy code
 make start
+```
 To view logs:
 
 ```bash
-Copy code
 make logs
+```
 To stop the running containers:
 
 ```bash
-Copy code
 make stop
+```
 To clean up Docker containers, images, volumes:
 
-```bashCopy code
-run
+```bash
 make clean
+```
 ### Access the Application
 
 Once the application is running, you can access the following:
