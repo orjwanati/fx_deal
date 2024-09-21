@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Deal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div class="container mx-auto mt-10">
+    <h2 class="text-2xl font-bold mb-4">Create a New Deal</h2>
+    <form action="createDeal" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label for="fromCurrency" class="block text-gray-700 text-sm font-bold mb-2">From Currency (ISO Code)</label>
+            <select id="fromCurrency" name="fromCurrency" class="form-select mt-1 block w-full p-2 border border-gray-300 rounded" required>
+                <option value="">Select Currency</option>
+                <th:block th:each="currency : ${currencies}">
+                    <option th:value="${currency.code}" th:text="${currency.code}"></option>
+                </th:block>
+            </select>
+
+        </div>
+        <div class="mb-4">
+            <label for="toCurrency" class="block text-gray-700 text-sm font-bold mb-2">To Currency (ISO Code)</label>
+            <select id="toCurrency" name="toCurrency" class="form-select mt-1 block w-full p-2 border border-gray-300 rounded" required>
+                <option value="">Select Currency</option>
+                <th:block th:each="currency : ${currencies}">
+                    <option th:value="${currency.code}" th:text="${currency.code}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Deal Amount</label>
+            <input type="number" step="0.01" id="amount" name="amount" class="mt-1 block w-full p-2 border border-gray-300 rounded" placeholder="Deal Amount" required>
+        </div>
+
+        <div class="mb-4">
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+        </div>
+    </form>
+
+    <h2 class="text-2xl font-semibold mb-4">All Deals</h2>
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg">
+        <thead>
+        <tr class="bg-gray-100">
+            <th class="text-start py-2 px-4 border-b">Deal ID</th>
+            <th class="py-2 px-4 border-b">From Currency</th>
+            <th class="py-2 px-4 border-b">To Currency</th>
+            <th class="py-2 px-4 border-b">Amount</th>
+            <th class="py-2 px-4 border-b">Timestamp</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="deal : ${deals}">
+            <tr class="hover:bg-gray-100">
+                <td class="text-center py-2 px-4 border-b" th:text="${deal.dealUniqueId}"></td>
+                <td class="text-center py-2 px-4 border-b" th:text="${deal.fromCurrency}"></td>
+                <td class="text-center py-2 px-4 border-b" th:text="${deal.toCurrency}"></td>
+                <td class="text-center py-2 px-4 border-b" th:text="${deal.dealAmount}"></td>
+                <td class="text-center py-2 px-4 border-b" th:text="${deal.dealTimestamp}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

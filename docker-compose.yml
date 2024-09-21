@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: dealRoot   # Change this for production
+      MYSQL_DATABASE: fx_deal_db         # Database name
+      MYSQL_USER: adminRoot              # Your MySQL username
+      MYSQL_PASSWORD: tre56%343fr          # Your MySQL password
+    ports:
+      - "3307:3306"  # Maps port 3307 on the host to port 3306 in the container
+    volumes:
+      - mysql-data:/var/lib/mysql           # Persistent storage
+
+  springboot-app:
+    build: .
+    image: fx_deal          # Change this to your desired image name
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/fx_deal_db
+      SPRING_DATASOURCE_USERNAME: adminRoot
+      SPRING_DATASOURCE_PASSWORD: tre56%343fr
+
+    ports:
+      - "8080:8080"                         # Expose Spring Boot app port
+    depends_on:
+      - mysql                               # Wait for MySQL to start
+
+volumes:
+  mysql-data:                               # Volume for MySQL data persistence
